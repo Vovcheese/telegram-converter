@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Cервис переадресации ссылок в Telegram.">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+    crossorigin="anonymous">
+
+  <title>Переадресация телеграмм</title>
+
+  <style>
+    html, body {
+      height: 100%;
+    }
+    .hidden {
+      display: none!important;
+    }
+    .title {
+      color: #d8d8d8;
+      font-weight: normal;
+      font-size: 1em;
+    }
+    .btn {
+      font-size: 0.7em;
+      text-transform: uppercase;
+    }
+    #btn-push, #link {
+      background-color: #4a76b1;
+      border-color: #4a76b1;
+      color: #fff;
+    }
+    #link-form {
+      width: 100%;
+    }
+    #inputUrl {
+      margin-bottom: 20px;
+    }
+  </style>
+
+</head>
+
+<body class="text-center d-flex flex-column">
+  <div class="container d-flex justify-content-center align-items-center flex-grow-1 flex-column">
+
+    <!-- convert form -->
+    <form id="link-form" class="hidden justify-content-center">
+      <div class="row">
+        <div class="col">
+          <h1 class="title">Переадресация телеграмм</h2>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-5">
+          <input type="inputUrl" id="inputUrl" class="form-control" placeholder="t.me/link" required="" autofocus="">
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-4">
+          <button class="btn btn-lg btn-primary btn-block" onclick="handleUrl()" id="btn-push" type='button'>Получить
+            адрес</button>
+        </div>
+      </div>
+    </form>
+
+    <!-- open page -->
+    <div id="open-link" class="flex-column d-flex col justify-content-center align-items-center hidden">
+      <div class="row justify-content-center w-100">
+        <div class="col-md-5">
+          <a id="link" class="btn btn-lg btn-primary btn-block">Открыть</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var pageUrl = '/',
+      isIndex = window.location.pathname === '/',
+      blockId = isIndex ? 'link-form' : 'open-link',
+      block = document.getElementById(blockId),
+      haveBanners = document.querySelector('.banner') !== null,
+      timeout = haveBanners ? 5000 : 100;
+
+    block.classList.remove('hidden');
+    if (!isIndex) {
+      pageUrl = window.location.pathname
+      forward();
+    }
+
+    document.getElementById('link-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+    });
+
+    document.getElementById('inputUrl').addEventListener('keyup', function (e) {
+      if (e.keyCode !== 13) {
+        return;
+      }
+      e.preventDefault();
+      handleUrl();
+    });
+
+    function handleUrl() {
+      function setValue(val) {
+        document.getElementById("inputUrl").value = val;
+      }
+      var value = document.getElementById("inputUrl").value;
+      if (value.match(/^[a-zA-Z\?=\d_-]+$/)) {
+        return setValue("https://" + window.location.host + "/" + value);
+      }
+      value = value
+        .replace(/.*t\.me/, "https://" + window.location.host)
+        .replace("http://", "https://")
+        .replace("@", "https://" + window.location.host + "/");
+
+      setValue(value);
+    }
+
+
+    function getLocation(url) {
+      var link = document.createElement('a');
+      link.href = url;
+
+      return link;
+    }
+
+    function forward() {
+      var location = getLocation(pageUrl),
+        info = location.pathname.split("/"),
+        str = '';
+
+      switch (info[1]) {
+        case "joinchat":
+          str = "tg://join?invite=" + info[2];
+          break;
+        default:
+          var domain = info[1];
+          str = "tg://resolve?domain=" + domain + location.search.replace("?start=", "&start=");
+          if (info[2]) {
+            str += "&post=" + info[2]
+          }
+      }
+
+      document.getElementById("link").href = str;
+      setTimeout(function () {
+        window.location.replace(str);
+      }, timeout);
+
+    }
+  </script>
+</body>
+</html>
