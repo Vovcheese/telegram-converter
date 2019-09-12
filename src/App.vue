@@ -58,7 +58,7 @@ export default {
     SpainTemplate
   },
   metaInfo: {
-    title: "Переадресация телеграмм",
+    title: "Конвертер телеграмм ссылок",
     titleTemplate: "%s"
   }
 };
