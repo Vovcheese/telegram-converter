@@ -3,7 +3,7 @@
     spain-template
 
   #app(:style='switchImg' v-else)
-    logo
+    //- logo
     router-view
     footer
 </template>
@@ -37,7 +37,8 @@ export default {
     switchImg() {
       const path = this.$route.path;
       const style = {
-        background: `url(${require("@/assets/images/background.png")})`,
+        backgroundColor: '#f0f5f9',
+        // background: `url(${require("@/assets/images/background.png")})`,
         backgroundPosition: null,
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat"

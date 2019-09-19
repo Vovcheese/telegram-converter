@@ -5,23 +5,12 @@
       <span v-for="error in errors" class="errors__text">{{ error }}</span>
     </div>
 
-    <div :class="inputGroupClassName" v-on:keyup.enter="createLink">
-      <input
-        @focus="onFocus"
-        @blur="onBlur"
-        v-model="url"
-        class="input-group__input"
-        placeholder="t.me/.."
-        required
-        autofocus
-        tabindex="1"
-      >
-
-      <button class="input-group__button" @click="createLink">
-        <i class="icon ion-ios-arrow-forward"></i>
-      </button>
+    <!-- header -->
+    <div class="header">
+      <p class="header__title">Конвертер ссылок</p>
     </div>
 
+    <!-- links -->
     <div class="new-links">
       <transition-group name="links">
         <UsedLink
@@ -31,6 +20,24 @@
           :newUrl="link.our"
         />
       </transition-group>
+    </div>
+
+    <!-- create link  -->
+    <div :class="inputGroupClassName" v-on:keyup.enter="createLink">
+      <input
+        @focus="onFocus"
+        @blur="onBlur"
+        v-model="url"
+        class="input-group__input"
+        placeholder="Write a link..."
+        required
+        autofocus
+        tabindex="1"
+      />
+
+      <button class="input-group__button" @click="createLink">
+        <i class="icon ion-ios-arrow-forward"></i>
+      </button>
     </div>
   </div>
 </template>
@@ -133,7 +140,7 @@ $shadow = 0 7px 30px 2px rgba(15, 35, 55, 0.1);
     color: red;
     font-size: 13px;
     font-weight: 600;
-    position:relative;
+    position: relative;
   }
 }
 
@@ -141,8 +148,7 @@ $shadow = 0 7px 30px 2px rgba(15, 35, 55, 0.1);
   flex-shrink: 0;
   width: 100%;
   display: flex;
-  border-radius: 8px;
-  border-radius: 8px;
+  // border-radius: 8px;
   box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
   transition: all 0.3s ease-in;
 
@@ -158,9 +164,9 @@ $shadow = 0 7px 30px 2px rgba(15, 35, 55, 0.1);
     font-weight: 200;
     color: #7f898e;
     line-height: 32px;
-    border: none;
-    border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
+    border-left: none;
+    border-top: 1px solid #eaeaea;
 
     &::placeholder {
       color: #c5ccd0;
@@ -176,7 +182,7 @@ $shadow = 0 7px 30px 2px rgba(15, 35, 55, 0.1);
     border: none;
     background: #4F86C6;
     transition: all 0.1s ease-in;
-    border-top-right-radius: 8px;
+    // border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
 
     &:active {
@@ -186,11 +192,27 @@ $shadow = 0 7px 30px 2px rgba(15, 35, 55, 0.1);
   }
 }
 
+.header {
+  margin-top: 50px;
+  flex-shrink: 0;
+  width: 100%;
+  display: flex;
+  // border-radius: 8px;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  transition: all 0.3s ease-in;
+  background-color: white;
+
+  &__title {
+    padding-left: 30px;
+    font-weight: 700;
+  }
+}
+
 .new-links {
-  margin-top: 30px;
+  // margin-top: 30px;
   background: #f9f9f9;
-  border-radius: 8px;
-  max-height: 400px;
+  // border-radius: 8px;
+  max-height: 500px;
   overflow-y: auto;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.05);
 

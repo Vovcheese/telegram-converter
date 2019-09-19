@@ -5,7 +5,7 @@
         <img
           class="created-link__favicon"
           :src="`http://www.google.com/s2/favicons?domain=${oldUrl}`"
-        >
+        />
         <span class="created-link__old-link">{{oldUrl}}</span>
       </span>
       <a :href="newUrl" class="created-link__url">
@@ -13,9 +13,9 @@
         <span>{{newUrl}}</span>
       </a>
     </div>
-    <button v-clipboard:copy="newUrl" class="created-link__copy">
+    <!-- <button v-clipboard:copy="newUrl" class="created-link__copy">
       <i class="ion-md-copy"></i>
-    </button>
+    </button>-->
   </div>
 </template>
 
@@ -29,12 +29,14 @@ export default {
 <style lang="stylus" scoped>
 .created-link {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
-  padding: 0.6em;
+  padding: 0.8em;
   box-sizing: border-box;
   position: relative;
+  background-image: url('../assets/images/background.png');
 
+  // border-bottom: 1px solid #eaeaea;
   &:not(:last-child):before {
     content: '';
     position: absolute;
@@ -52,6 +54,27 @@ export default {
     flex-direction: column;
     align-items: flex-start;
     width: calc(100% - 55px);
+    background-color: #e7fecc;
+    border-radius: 16px;
+    margin: 1px;
+    padding: 15px;
+    position: relative;
+    max-width: 500px;
+  }
+
+  &__info:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+    border-left-color: #e7fecc;
+    border-right: 0;
+    border-bottom: 0;
+    margin-top: 16.48px;
+    margin-right: -10px;
   }
 
   &__favicon {
@@ -89,15 +112,15 @@ export default {
   }
 
   &__old {
-    width 100%;
-    text-align left 
+    width: 100%;
+    text-align: left;
     display: flex;
     align-items: center;
     color: #7f898e;
   }
 
   &__old-link {
-    width 94%;
+    width: 94%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -109,7 +132,6 @@ export default {
     font-weight: 500;
     display: flex;
     align-items: center;
-    
   }
 }
 </style>
