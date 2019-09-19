@@ -166,6 +166,8 @@ $shadow = 0 7px 30px 2px rgba(15, 35, 55, 0.1);
     line-height: 32px;
     border-bottom-left-radius: 8px;
     border-left: none;
+    border-right: none;
+    border-bottom: none;
     border-top: 1px solid #eaeaea;
 
     &::placeholder {
