@@ -5,12 +5,23 @@
       <span v-for="error in errors" class="errors__text">{{ error }}</span>
     </div>
 
-    <!-- header -->
-    <div class="header">
-      <p class="header__title">Конвертер ссылок</p>
+    <div :class="inputGroupClassName" v-on:keyup.enter="createLink">
+      <input
+        @focus="onFocus"
+        @blur="onBlur"
+        v-model="url"
+        class="input-group__input"
+        placeholder="t.me/.."
+        required
+        autofocus
+        tabindex="1"
+      >
+
+      <button class="input-group__button" @click="createLink">
+        <i class="icon ion-ios-arrow-forward"></i>
+      </button>
     </div>
 
-    <!-- links -->
     <div class="new-links">
       <transition-group name="links">
         <UsedLink
@@ -21,24 +32,6 @@
         />
       </transition-group>
     </div>
-
-    <!-- create link  -->
-    <div :class="inputGroupClassName" v-on:keyup.enter="createLink">
-      <input
-        @focus="onFocus"
-        @blur="onBlur"
-        v-model="url"
-        class="input-group__input"
-        placeholder="Write a link..."
-        required
-        autofocus
-        tabindex="1"
-      />
-
-      <button class="input-group__button" @click="createLink">
-        <i class="icon ion-ios-arrow-forward"></i>
-      </button>
-    </div>
   </div>
 </template>
 
@@ -47,7 +40,6 @@ import Url from "url-parse";
 import cn from "classnames";
 import UsedLink from "@/components/Link";
 import ky from "ky";
-
 export default {
   name: "HelloWorld",
   data() {
@@ -107,7 +99,6 @@ export default {
           .replace(/.*t\.me/, "https://" + window.location.host)
           .replace("http://", "https://")
           .replace("@", "");
-
         this.addLink(this.url, link);
       } else {
         if (this.errors.length === 0)
@@ -120,42 +111,36 @@ export default {
 
 <style lang="stylus" scoped>
 $shadow = 0 7px 30px 2px rgba(15, 35, 55, 0.1);
-
 .get-url {
   width: 90%;
   max-width: 600px;
   display: flex;
   flex-direction: column;
 }
-
 .icon {
   font-size: 24px;
 }
-
 .errors {
   position: absolute;
-
   &__text {
     bottom: 25px;
     color: red;
     font-size: 13px;
     font-weight: 600;
-    position: relative;
+    position:relative;
   }
 }
-
 .input-group {
   flex-shrink: 0;
   width: 100%;
   display: flex;
-  // border-radius: 8px;
+  border-radius: 8px;
+  border-radius: 8px;
   box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
   transition: all 0.3s ease-in;
-
   &.focused {
     box-shadow: $shadow;
   }
-
   &__input {
     outline: none;
     width: 100%;
@@ -164,17 +149,13 @@ $shadow = 0 7px 30px 2px rgba(15, 35, 55, 0.1);
     font-weight: 200;
     color: #7f898e;
     line-height: 32px;
+    border: none;
+    border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
-    border-left: none;
-    border-right: none;
-    border-bottom: none;
-    border-top: 1px solid #eaeaea;
-
     &::placeholder {
       color: #c5ccd0;
     }
   }
-
   &__button {
     cursor: pointer;
     outline: none;
@@ -184,56 +165,34 @@ $shadow = 0 7px 30px 2px rgba(15, 35, 55, 0.1);
     border: none;
     background: #4F86C6;
     transition: all 0.1s ease-in;
-    // border-top-right-radius: 8px;
+    border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
-
     &:active {
       background: #2196f3;
       box-shadow: 0 0 30px 4px rgba(33, 150, 243, 0.2);
     }
   }
 }
-
-.header {
-  margin-top: 50px;
-  flex-shrink: 0;
-  width: 100%;
-  display: flex;
-  // border-radius: 8px;
-  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
-  transition: all 0.3s ease-in;
-  background-color: white;
-
-  &__title {
-    padding-left: 30px;
-    font-weight: 700;
-  }
-}
-
 .new-links {
-  // margin-top: 30px;
+  margin-top: 30px;
   background: #f9f9f9;
-  // border-radius: 8px;
-  max-height: 500px;
+  border-radius: 8px;
+  max-height: 400px;
   overflow-y: auto;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.05);
-
   // box-shadow: $shadow;
   &__header {
     display: flex;
     padding-top: 0.5em;
   }
 }
-
 .links-enter-active, .links-leave-active {
   transition: all 0.5s ease-in-out;
 }
-
 .links-enter, .links-leave-to {
   opacity: 0;
   transform: translateY(40px);
 }
-
 .links-move {
   transition: transform 0.35s ease-in-out;
 }

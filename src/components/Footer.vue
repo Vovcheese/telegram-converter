@@ -1,8 +1,8 @@
 <template>
   <footer class="footer">
     <span class="footer__copyright">
-      <!-- <span>Made with</span>
-      <i class="icon-heart ion-md-heart-empty"></i> -->
+      <span>Made with</span>
+      <i class="icon-heart ion-md-heart-empty"></i>
     </span>
   </footer>
 </template>
@@ -14,14 +14,12 @@
   color: #ff2247;
   font-size: 16px;
 }
-
 .footer {
   margin-top: auto;
   padding-bottom: 18px;
   padding-top: 10px;
   font-size: 12px;
   color: #7f898e;
-
   &__copyright {
     opacity: 0.7;
     display: flex;

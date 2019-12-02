@@ -1,9 +1,6 @@
 <template lang="pug">
-  #app(v-if="this.$route.path === '/joinchat/AAAAAE0pVA6iCpzrW9B6yA'")
-    spain-template
-
-  #app(:style='switchImg' v-else)
-    //- logo
+  #app(:style='switchImg')
+    logo
     router-view
     footer
 </template>
@@ -12,24 +9,12 @@
 import Logo from "./components/Logo";
 import Footer from "./components/Footer";
 
-import SpainTemplate from "./components/templates/SpainTemplate";
-
 const chatBgs = {
-  // bbetlive
+  // images for specific link
   AAAAAE8iXu0CK0yzXLE1EQ: {
-    background: `url(${require("@/assets/images/1bbet.jpg")})`,
+    background: `url(${require("@/assets/images/background.png")})`,
     backgroundPosition: `center`
   },
-  // rich_vas
-  "AAAAAEQ_FoV-Z5T-1gppaw": {
-    background: `url(${require("@/assets/images/rich_vas.jpg")})`,
-    backgroundPosition: `center`
-  },
-  // kotov
-  AAAAAEmgas_pAFXeyDu44Q: {
-    background: `url(${require("@/assets/images/r8bbet.jpg")})`,
-    backgroundPosition: `center`
-  }
 };
 
 export default {
@@ -56,7 +41,6 @@ export default {
   components: {
     Logo,
     Footer,
-    SpainTemplate
   },
   metaInfo: {
     title: "Конвертер телеграмм ссылок",

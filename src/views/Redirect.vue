@@ -3,7 +3,6 @@
     .main
       a.link(:href='newUrl') Перейти
 
-
 </template>
 
 <script>
@@ -11,11 +10,6 @@ export default {
   computed: {
     newUrl() {
       const path = this.$route.path;
-
-      if (path.endsWith("bk1win")) {
-        return `tg://join?invite=AAAAAEOBOGmuQYcz61e6dQ`;
-      }
-
       let newUrl = "";
       if (path.includes("joinchat")) {
         const groupLinkId = path.split("joinchat/")[1];
@@ -34,8 +28,8 @@ export default {
     }
   },
   created() {
-    const qs = new URLSearchParams(location.search)
-    if (qs.has('open')) open(this.newUrl, '_self')
+    const qs = new URLSearchParams(location.search);
+    if (qs.has("open")) open(this.newUrl, "_self");
   }
 };
 </script>
@@ -46,39 +40,17 @@ export default {
   padding-top: 1em;
 }
 
+.main {
+  margin-top: 150px;
+}
+
 .link {
-  background-color: #2b90d9;
-  width: 200px;
-  -webkit-border-radius: 7px;
-  border: none;
-  color: #e4e2e2;
-  cursor: pointer;
-  display: inline-block;
-  text-align: center;
   text-decoration: none;
   font-size: 24px;
   padding: 10px 20px;
   border-radius: 8px;
-}
-
-@keyframes glowing {
-  0% {
-    background-color: #054775;
-    box-shadow: 0 0 2px #074673;
-  }
-
-  50% {
-    background-color: #f94e3f;
-    box-shadow: 0 0 9px #0e87de;
-  }
-
-  100% {
-    background-color: #30A9DE;
-    box-shadow: 0 0 2px #47b8e0;
-  }
-}
-
-.link {
-  animation: glowing 1500ms infinite;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.05);
+  color: #fff;
+  background-image: linear-gradient(to right, #03a9f4 0%, darken(#03a9f4, 5%) 100%);
 }
 </style>

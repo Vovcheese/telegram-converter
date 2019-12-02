@@ -15,7 +15,6 @@
   margin: 50px 0;
   padding: 5px;
   transition: all 0.1s ease-in-out;
-
   &:hover {
     color: #4F86C6;
   }
